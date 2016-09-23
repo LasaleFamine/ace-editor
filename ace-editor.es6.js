@@ -24,8 +24,7 @@ class aceEditor {
       },
       theme: {
         type: String,
-        value: 'monokai',
-        notify: true,
+        value: 'monokai'
       },
       _isAceInit: {
         type: Boolean,

@@ -27,7 +27,7 @@ Versatility also for all the methods of ***Ace***: you can access directly the A
 ## Default Properties
 ``` js
 
-this.properties = {
+{
   /** Ace istance **/
   Ace: {
     type: Function,
@@ -39,13 +39,8 @@ this.properties = {
   theme: {
     type: String,
     value: 'monokai',
-    notify: true,
-  },
-  _isAceInit: {
-    type: Boolean,
-    value: false
-  },
-};
+  }
+}
 
 ```
 
