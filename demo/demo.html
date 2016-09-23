@@ -1,0 +1,31 @@
+<!-- <link rel="import" href="../../polymer/polymer.html"> -->
+<link rel="import" href="../ace-editor.html">
+
+<dom-module id="demo-page">
+    <template>
+        <h3>Basic ace-editor demo</h3>
+        <div>
+            <ace-editor theme="terminal" on-change="change"></ace-editor>
+            <ace-editor on-blur="blur"></ace-editor>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "demo-page",
+            properties: {
+              content: String
+            },
+            attached: function () {
+
+            },
+
+            change: function (evt) {
+              console.log('change')
+            },
+            blur: function (evt) {
+              console.log('blur')
+            }
+        });
+
+    </script>
+</dom-module>

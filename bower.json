@@ -1,0 +1,28 @@
+{
+  "name": "ace-editor",
+  "main": "ace-editor.js",
+  "version": "0.0.1",
+  "authors": [
+    "LasaleFamine <info@godev.space>"
+  ],
+  "description": "Polymer (ES6) wrapper of Ace (C9) editor",
+  "keywords": [
+    "ace",
+    "c9",
+    "editor",
+    "polymer",
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/LasaleFamine/ace-editor#readme",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.6.1"
+  }
+}
