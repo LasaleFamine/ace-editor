@@ -1,10 +1,11 @@
 'use strict';
 
-/** TODO: code syntax ESLint */
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Polymer = window.Polymer;
+var CustomEvent = window.CustomEvent;
 
 var aceEditor = function () {
   function aceEditor() {
@@ -25,14 +26,17 @@ var aceEditor = function () {
         Ace: {
           type: Function
         },
+        version: {
+          type: String,
+          value: '1.2.5'
+        },
         mode: {
           type: String,
           value: 'html'
         },
         theme: {
           type: String,
-          value: 'monokai',
-          notify: true
+          value: 'monokai'
         },
         _isAceInit: {
           type: Boolean,
@@ -46,12 +50,17 @@ var aceEditor = function () {
   }, {
     key: 'ready',
     value: function ready() {
-      this._insertLib('https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js', 'ace');
+      this._insertLib('https://cdnjs.cloudflare.com/ajax/libs/ace/' + this.version + '/ace.js', 'ace');
+      // TODO: this is for testing purpose
+      //this._insertLib('../../ace/lib/ace/ace.js', 'ace')
     }
   }, {
     key: 'detached',
     value: function detached() {
       this._removeLib();
+      document.removeEventListener('ace-editor-loaded', function (evt) {
+        console.info('EVT listener removed correctly');
+      });
     }
 
     /**
@@ -125,10 +134,10 @@ var aceEditor = function () {
   }, {
     key: '_initAce',
     value: function _initAce() {
-      this.Ace = ace.edit(this.$.editor);
+      this.Ace = window.ace.edit(this.$.editor);
       this._initListeners();
-      this.Ace.setTheme("ace/theme/" + this.theme);
-      this.Ace.getSession().setMode("ace/mode/" + this.mode);
+      this.Ace.setTheme('ace/theme/' + this.theme);
+      this.Ace.getSession().setMode('ace/mode/' + this.mode);
     }
 
     /* Add listener to the document for the load of the library */

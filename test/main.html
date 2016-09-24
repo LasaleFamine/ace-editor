@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- MAIN IMPORTS -->
+    <script src="./../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="./../../web-component-tester/browser.js"></script>
+
+
+    <link rel="import" href="./../../polymer/polymer.html">
+
+    <!-- COMPONENT TO TEST -->
+    <link rel="import" href="./../ace-editor.html">
+</head>
+
+<body>
+
+    <test-fixture id="aceEditor">
+        <template>
+            <ace-editor></ace-editor>
+        </template>
+    </test-fixture>
+
+
+    <script>
+        suite('<ace-editor>', function() {
+            var aceEditor;
+
+            setup(function() {
+                aceEditor = fixture('aceEditor');
+            });
+
+            suite('Test Properties', function() {
+                test('Default Properties', function() {
+                    assert.isUndefined(aceEditor.Ace, "Ace undefined on-load");
+                    assert.equal(aceEditor.version, "1.2.5", "Correct current version");
+                    assert.equal(aceEditor.mode, "html", "Correct current mode");
+                    assert.equal(aceEditor.theme, "monokai", "Correct current theme");
+                    assert.isFalse(aceEditor._isAceInit, "Correct flag initialization on false");
+                });
+
+                test('Initialization library', function(done) {
+                    setTimeout(function () {
+                      assert.isObject(aceEditor.Ace, "Correct initialization library");
+                      done();
+                    }, 1000)
+                });
+            });
+
+            suite('Test Methods', function() {
+            });
+        });
+    </script>
+</body>
+
+</html>

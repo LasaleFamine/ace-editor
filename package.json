@@ -1,6 +1,6 @@
 {
   "name": "ace-editor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Polymer (ES6) wrapper of Ace (C9) editor",
   "main": "ace-editor.js",
   "repository": {
@@ -8,7 +8,8 @@
     "url": "git+https://github.com/LasaleFamine/ace-editor.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard ace-editor.es6.js && wct",
+    "fix": "standard --fix"
   },
   "author": "Alessio Occhipinti @lasalefamine",
   "license": "MIT",
@@ -19,6 +20,8 @@
     "gulp-connect": "^5.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-watch": "^4.3.9"
+    "gulp-watch": "^4.3.9",
+    "standard": "^8.1.0",
+    "web-component-tester": "^4.3.4"
   }
 }
