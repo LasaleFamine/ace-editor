@@ -53,11 +53,10 @@ class aceEditor {
   /**
    *  {function} setTheme set the choosen theme
    *  {string} theme Name of the theme to set
-   *  {return} null
    **/
   setTheme (theme) {
-    this.set('theme', theme)
     this.Ace.setTheme('ace/theme/' + this.theme)
+    this.set('theme', theme)
   }
 
   /**
@@ -65,8 +64,26 @@ class aceEditor {
    *  {string} mode Name of the mode to set
    **/
   setMode (mode) {
-    this.set('mode', mode)
     this.Ace.getSession().setMode('ace/mode/' + this.mode)
+    this.set('mode', mode)
+  }
+
+  /**
+   *
+   *  {function} setContent set the passed content
+   *  {string} content Content that will override the current content
+   **/
+  setContent (content) {
+    this.Ace.setValue(content, 1)
+  }
+
+  /**
+   *
+   *  {function} appendContent append the passed content
+   *  {string} content Content that will be appended to the after the current content
+   **/
+  appendContent (content) {
+    this.Ace.setValue(this.Ace.getValue() + ' ' + content, 1)
   }
 
   /**
@@ -104,9 +121,12 @@ class aceEditor {
 
   _initAce () {
     this.Ace = window.ace.edit(this.$.editor)
+    this.Ace.$blockScrolling = Infinity
     this._initListeners()
     this.Ace.setTheme('ace/theme/' + this.theme)
     this.Ace.getSession().setMode('ace/mode/' + this.mode)
+    this._isAceInit = true
+    this.dispatchEvent(new CustomEvent('ace-ready'))
   }
 
   /* Add listener to the document for the load of the library */

@@ -42,14 +42,47 @@
                 });
 
                 test('Initialization library', function(done) {
-                    setTimeout(function () {
-                      assert.isObject(aceEditor.Ace, "Correct initialization library");
-                      done();
-                    }, 1000)
+                    aceEditor.addEventListener('ace-ready', function (evt) {
+                        assert.isObject(aceEditor.Ace, "Correct initialization library");
+                        assert.isTrue(aceEditor._isAceInit, "Correct flag initialization on true");
+                        done();
+                    })
                 });
             });
 
             suite('Test Methods', function() {
+              test('check setTheme()', function(done) {
+                aceEditor.addEventListener('ace-ready', function (evt) {
+                  var val = 'terminal';
+                  aceEditor.setTheme(val);
+                  assert.equal(aceEditor.theme, val);
+                  done();
+                })
+              })
+              test('check setMode()', function(done) {
+                aceEditor.addEventListener('ace-ready', function (evt) {
+                  var val = 'javascript';
+                  aceEditor.setMode(val);
+                  assert.equal(aceEditor.mode, val);
+                  done();
+                })
+              })
+              test('check setContent() and getContent()', function(done) {
+                aceEditor.addEventListener('ace-ready', function (evt) {
+                  var val = 'test content';
+                  aceEditor.setContent(val);
+                  assert.equal(aceEditor.getContent(), val);
+                  done();
+                })
+              })
+              test('check appendContent()', function(done) {
+                aceEditor.addEventListener('ace-ready', function (evt) {
+                  var val = 'test content';
+                  aceEditor.appendContent(val);
+                  assert.equal(aceEditor.getContent(), " " + val);
+                  done();
+                })
+              })
             });
         });
     </script>

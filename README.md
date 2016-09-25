@@ -1,10 +1,9 @@
 # `<ace-editor>` Polymer (ES6)
 
-
-:construction: Work in progress :construction:
-
 [![Build status](https://travis-ci.org/LasaleFamine/ace-editor.svg?branch=master)](https://travis-ci.org/LasaleFamine/ace-editor)
+[![Bower](https://img.shields.io/bower/v/polymer-ace-editor.svg?maxAge=2592000)](https://github.com/LasaleFamine/ace-editor)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![David](https://img.shields.io/david/dev/lasalefamine/ace-editor.svg?maxAge=2592000?style=plastic)](https://github.com/LasaleFamine/ace-editor)
 
 
 > Wrapper of [Ace Editor](https://ace.c9.io) as a customizable [Polymer 1.0](https://www.polymer-project.org/1.0/) component in ES6 syntax.
@@ -26,7 +25,7 @@ Versatility also for all the methods of ***Ace***: you can access directly the A
 
 ## Install
 
-    $ bower install LasaleFamine/ace-editor
+    $ bower install polymer-ace-editor
 
 
 ## Default Properties
@@ -89,8 +88,23 @@ Return type: `string`
 String with the content (also the HTML) currently within the editor
 ___
 
+#### .setContent(content)
+##### content
+Type: `string`  
+Content will override the current content of the editor. The content needs to be passed as string
+___
+
+#### .appendContent(content)
+##### content
+Type: `string`  
+Content will be appended after the current content of the editor. The content needs to be passed as string
+___
+
 ### Events
 [ref: Events section](https://ace.c9.io/#nav=api&api=editor)
+#### on-ace-ready
+After the correct initialization of the library and the component
+
 #### on-change
 Ace => ``` Editor.on('change') ```
 #### on-blur
@@ -123,16 +137,18 @@ Clone the repository ***inside a folder*** (ex: `sandbox-ace-editor/ace-editor`)
 
 Developing mode: **watch** on base files and **Babel** that transpiles (http://localhost:8080/ace-editor/demo)
 
-    $ gulp watch
+    $ npm start
 
 Build: only the **Babel** action simply run
 
-    $ gulp
+    $ npm run build
 
 
 ## Test
 
-[WIP]
+[Standard](https://github.com/feross/standard) for coding style and [WCT](https://github.com/polymer/web-component-tester) for unit test:
+
+    $ npm test
 
 ## License
 

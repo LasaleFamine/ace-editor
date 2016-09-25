@@ -51,8 +51,6 @@ var aceEditor = function () {
     key: 'ready',
     value: function ready() {
       this._insertLib('https://cdnjs.cloudflare.com/ajax/libs/ace/' + this.version + '/ace.js', 'ace');
-      // TODO: this is for testing purpose
-      //this._insertLib('../../ace/lib/ace/ace.js', 'ace')
     }
   }, {
     key: 'detached',
@@ -66,14 +64,13 @@ var aceEditor = function () {
     /**
      *  {function} setTheme set the choosen theme
      *  {string} theme Name of the theme to set
-     *  {return} null
      **/
 
   }, {
     key: 'setTheme',
     value: function setTheme(theme) {
-      this.set('theme', theme);
       this.Ace.setTheme('ace/theme/' + this.theme);
+      this.set('theme', theme);
     }
 
     /**
@@ -84,8 +81,32 @@ var aceEditor = function () {
   }, {
     key: 'setMode',
     value: function setMode(mode) {
-      this.set('mode', mode);
       this.Ace.getSession().setMode('ace/mode/' + this.mode);
+      this.set('mode', mode);
+    }
+
+    /**
+     *
+     *  {function} setContent set the passed content
+     *  {string} content Content that will override the current content
+     **/
+
+  }, {
+    key: 'setContent',
+    value: function setContent(content) {
+      this.Ace.setValue(content, 1);
+    }
+
+    /**
+     *
+     *  {function} appendContent append the passed content
+     *  {string} content Content that will be appended to the after the current content
+     **/
+
+  }, {
+    key: 'appendContent',
+    value: function appendContent(content) {
+      this.Ace.setValue(this.Ace.getValue() + ' ' + content, 1);
     }
 
     /**
@@ -135,9 +156,12 @@ var aceEditor = function () {
     key: '_initAce',
     value: function _initAce() {
       this.Ace = window.ace.edit(this.$.editor);
+      this.Ace.$blockScrolling = Infinity;
       this._initListeners();
       this.Ace.setTheme('ace/theme/' + this.theme);
       this.Ace.getSession().setMode('ace/mode/' + this.mode);
+      this._isAceInit = true;
+      this.dispatchEvent(new CustomEvent('ace-ready'));
     }
 
     /* Add listener to the document for the load of the library */

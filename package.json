@@ -1,6 +1,6 @@
 {
-  "name": "ace-editor",
-  "version": "0.0.2",
+  "name": "polymer-ace-editor",
+  "version": "0.1.0",
   "description": "Polymer (ES6) wrapper of Ace (C9) editor",
   "main": "ace-editor.js",
   "repository": {
@@ -8,7 +8,9 @@
     "url": "git+https://github.com/LasaleFamine/ace-editor.git"
   },
   "scripts": {
+    "start": "gulp watch",
     "test": "standard ace-editor.es6.js && wct",
+    "build": "gulp",
     "fix": "standard --fix"
   },
   "author": "Alessio Occhipinti @lasalefamine",

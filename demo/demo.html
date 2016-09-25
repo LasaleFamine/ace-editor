@@ -3,27 +3,57 @@
 
 <dom-module id="demo-page">
     <template>
+        <style>
+          .container {
+            display: flex;
+            flex-direction: row;
+          }
+          .item {
+            flex: 2; /* default 0 */
+          }
+        </style>
         <h3>Basic ace-editor demo</h3>
-        <div>
-            <ace-editor theme="terminal" on-change="change"></ace-editor>
-            <ace-editor on-blur="blur"></ace-editor>
+        <div class="container">
+            <div class="item">
+              <ace-editor id="one" theme="terminal" on-change="change" on-ace-ready="aceReady"></ace-editor>
+            </div>
+            <div class="item">
+              <div id="preview1"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="item">
+              <ace-editor id="two" on-blur="blur"></ace-editor>
+            </div>
+            <div class="item">
+              <div id="preview2"></div>
+            </div>
         </div>
     </template>
     <script>
         Polymer({
             is: "demo-page",
             properties: {
-              content: String
+              content: {
+                type: String,
+                value: "<h1>Test content</h1>"
+              }
             },
             attached: function () {
-
             },
 
             change: function (evt) {
               console.log('change')
+              var content = this.$.one.getContent()
+              this.$.preview1.innerHTML = content
             },
             blur: function (evt) {
               console.log('blur')
+            },
+            aceReady: function (evt) {
+              console.log('ready')
+              this.$.one.setContent(this.content)
+              this.$.one.appendContent("hello")
             }
         });
 
