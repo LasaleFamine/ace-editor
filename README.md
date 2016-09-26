@@ -6,14 +6,14 @@
 [![David](https://img.shields.io/david/dev/lasalefamine/ace-editor.svg?maxAge=2592000?style=plastic)](https://github.com/LasaleFamine/ace-editor)
 
 
-> Wrapper of [Ace Editor](https://ace.c9.io) as a customizable [Polymer 1.0](https://www.polymer-project.org/1.0/) component in ES6 syntax.
+> Wrapper of [Ace Editor](https://ace.c9.io) as a customizable [Polymer 1.0](https://www.polymer-project.org/1.0/) WebComponent in ES6 syntax.
 
 ## Why
 
 Just...
 
 ``` html
-<link rel="import" href="[your_bower_folder]/ace-editor/ace-editor.html">
+<link rel="import" href="[your_bower_folder]/polymer-ace-editor/ace-editor.html">
 
 <ace-editor></ace-editor>
 
@@ -68,6 +68,8 @@ Example:
 
 ```
 
+## Note about **detaching**
+Is good to know that once a `<ace-editor` element is *detached* it removes also the library from the DOM. Of course the other instances of the component (if there are) attached will work anyway.
 
 ## API
 
@@ -127,6 +129,10 @@ Ace => ``` Editor.on('paste') ```
 You can also get the Ace instance and make your own methods. The property `this.Ace` is directly referenced to `window.ace` so you can, of course, call every method of Ace.
 
 Ref: [Ace API](https://ace.c9.io/#nav=api)
+
+## Other references
+
+[`polymer-lib-loader`](https://github.com/LasaleFamine/polymer-lib-loader) - for loading the library
 
 
 ## Develop

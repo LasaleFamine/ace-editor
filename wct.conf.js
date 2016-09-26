@@ -11,4 +11,4 @@ module.exports = {
       browsers: ['chrome']
     }
   }
-};
+}
