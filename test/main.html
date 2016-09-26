@@ -84,6 +84,39 @@
                 })
               })
             });
+
+
+            suite('Test Events', function() {
+                test('check on-change', function(done) {
+                  aceEditor.addEventListener('ace-ready', function (evt) {
+                    aceEditor.addEventListener('change', function (evt) {
+                      assert.equal(aceEditor.getContent(), val);
+                      done();
+                    })
+                    var val = 'testing';
+                    aceEditor.setContent(val);
+                  })
+                })
+                test('check on-blur', function(done) {
+                  aceEditor.addEventListener('ace-ready', function (evt) {
+                    aceEditor.addEventListener('blur', function (evt) {
+                      assert.isTrue(true);
+                      done();
+                    })
+                    aceEditor.dispatchEvent(new Event('blur'));
+                  })
+                })
+                test('check on-blur', function(done) {
+                  aceEditor.addEventListener('ace-ready', function (evt) {
+                    aceEditor.addEventListener('blur', function (evt) {
+                      assert.isTrue(true);
+                      done();
+                    })
+                    aceEditor.dispatchEvent(new Event('blur'));
+                  })
+                })
+
+            });
         });
     </script>
 </body>

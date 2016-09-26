@@ -26,6 +26,10 @@ var aceEditor = function () {
         Ace: {
           type: Function
         },
+        uniqueId: {
+          type: String,
+          value: 'aceEditorPolymerLibLoader'
+        },
         version: {
           type: String,
           value: '1.2.5'
@@ -45,20 +49,13 @@ var aceEditor = function () {
       };
     }
 
-    // onReady insert Ace.js library from CDN
+    // onReady fill <lib-loader> component to load Ace.js from CDN
 
   }, {
     key: 'ready',
     value: function ready() {
-      this._insertLib('https://cdnjs.cloudflare.com/ajax/libs/ace/' + this.version + '/ace.js', 'ace');
-    }
-  }, {
-    key: 'detached',
-    value: function detached() {
-      this._removeLib();
-      document.removeEventListener('ace-editor-loaded', function (evt) {
-        console.info('EVT listener removed correctly');
-      });
+      this._computeLibLink();
+      this._computeUniqueId();
     }
 
     /**
@@ -123,34 +120,16 @@ var aceEditor = function () {
     /** ===============
      * Private methods
      **/
-    /* Insert at the end of the body the js lib */
 
   }, {
-    key: '_insertLib',
-    value: function _insertLib(link, type) {
-      var _this = this;
-
-      if (document.querySelector('#' + type)) {
-        this._addListener();
-        return false;
-      }
-      this._addListener();
-      var src = document.createElement('script');
-      src.setAttribute('src', link);
-      src.id = type;
-      src.async = true;
-      src.onreadystatechange = src.onload = function (evt) {
-        _this._onLoadLib(evt, type);
-      };
-      document.body.appendChild(src);
+    key: '_computeLibLink',
+    value: function _computeLibLink() {
+      this.$.loaderAce.set('lib', 'https://cdnjs.cloudflare.com/ajax/libs/ace/' + this.version + '/ace.js');
     }
-
-    /** Remove lib from the dom */
-
   }, {
-    key: '_removeLib',
-    value: function _removeLib() {
-      window.ace.remove();
+    key: '_computeUniqueId',
+    value: function _computeUniqueId() {
+      this.$.loaderAce.set('libUniqueId', this.uniqueId);
     }
   }, {
     key: '_initAce',
@@ -163,56 +142,31 @@ var aceEditor = function () {
       this._isAceInit = true;
       this.dispatchEvent(new CustomEvent('ace-ready'));
     }
-
-    /* Add listener to the document for the load of the library */
-
-  }, {
-    key: '_addListener',
-    value: function _addListener() {
-      var _this2 = this;
-
-      document.addEventListener('ace-editor-loaded', function () {
-        if (window.ace && !_this2._isAceInit) _this2._initAce();
-      });
-    }
   }, {
     key: '_initListeners',
     value: function _initListeners() {
-      var _this3 = this;
+      var _this = this;
 
       this.Ace.on('change', function (e) {
-        _this3.dispatchEvent(new CustomEvent('change'));
+        _this.dispatchEvent(new CustomEvent('change'));
       });
       this.Ace.on('blur', function (e) {
-        _this3.dispatchEvent(new CustomEvent('blur'));
+        _this.dispatchEvent(new CustomEvent('blur'));
       });
       this.Ace.on('changeSelectionStyle', function (e) {
-        _this3.dispatchEvent(new CustomEvent('change-selection-style'));
+        _this.dispatchEvent(new CustomEvent('change-selection-style'));
       });
       this.Ace.on('changeSession', function (e) {
-        _this3.dispatchEvent(new CustomEvent('change-session'));
+        _this.dispatchEvent(new CustomEvent('change-session'));
       });
       this.Ace.on('copy', function (e) {
-        _this3.dispatchEvent(new CustomEvent('copy'));
+        _this.dispatchEvent(new CustomEvent('copy'));
       });
       this.Ace.on('focus', function (e) {
-        _this3.dispatchEvent(new CustomEvent('focus'));
+        _this.dispatchEvent(new CustomEvent('focus'));
       });
       this.Ace.on('paste', function (e) {
-        _this3.dispatchEvent(new CustomEvent('paste'));
-      });
-    }
-
-    /** ===============
-     * Event listeners
-     **/
-    /* On lib loaded */
-
-  }, {
-    key: '_onLoadLib',
-    value: function _onLoadLib(evt, type) {
-      setTimeout(function () {
-        document.dispatchEvent(new CustomEvent('ace-editor-loaded'));
+        _this.dispatchEvent(new CustomEvent('paste'));
       });
     }
   }, {

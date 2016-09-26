@@ -19,6 +19,10 @@ class aceEditor {
       Ace: {
         type: Function
       },
+      uniqueId: {
+        type: String,
+        value: 'aceEditorPolymerLibLoader'
+      },
       version: {
         type: String,
         value: '1.2.5'
@@ -38,16 +42,10 @@ class aceEditor {
     }
   }
 
-  // onReady insert Ace.js library from CDN
+  // onReady fill <lib-loader> component to load Ace.js from CDN
   ready () {
-    this._insertLib(`https://cdnjs.cloudflare.com/ajax/libs/ace/${this.version}/ace.js`, 'ace')
-  }
-
-  detached () {
-    this._removeLib()
-    document.removeEventListener('ace-editor-loaded', (evt) => {
-      console.info('EVT listener removed correctly')
-    })
+    this._computeLibLink()
+    this._computeUniqueId()
   }
 
   /**
@@ -97,26 +95,11 @@ class aceEditor {
   /** ===============
    * Private methods
    **/
-  /* Insert at the end of the body the js lib */
-  _insertLib (link, type) {
-    if (document.querySelector('#' + type)) {
-      this._addListener()
-      return false
-    }
-    this._addListener()
-    let src = document.createElement('script')
-    src.setAttribute('src', link)
-    src.id = type
-    src.async = true
-    src.onreadystatechange = src.onload = (evt) => {
-      this._onLoadLib(evt, type)
-    }
-    document.body.appendChild(src)
+  _computeLibLink () {
+    this.$.loaderAce.set('lib', `https://cdnjs.cloudflare.com/ajax/libs/ace/${this.version}/ace.js`)
   }
-
-  /** Remove lib from the dom */
-  _removeLib () {
-    window.ace.remove()
+  _computeUniqueId () {
+    this.$.loaderAce.set('libUniqueId', this.uniqueId)
   }
 
   _initAce () {
@@ -127,13 +110,6 @@ class aceEditor {
     this.Ace.getSession().setMode('ace/mode/' + this.mode)
     this._isAceInit = true
     this.dispatchEvent(new CustomEvent('ace-ready'))
-  }
-
-  /* Add listener to the document for the load of the library */
-  _addListener () {
-    document.addEventListener('ace-editor-loaded', () => {
-      if (window.ace && !this._isAceInit) this._initAce()
-    })
   }
 
   _initListeners () {
@@ -157,16 +133,6 @@ class aceEditor {
     })
     this.Ace.on('paste', (e) => {
       this.dispatchEvent(new CustomEvent('paste'))
-    })
-  }
-
-  /** ===============
-   * Event listeners
-   **/
-  /* On lib loaded */
-  _onLoadLib (evt, type) {
-    setTimeout(() => {
-      document.dispatchEvent(new CustomEvent('ace-editor-loaded'))
     })
   }
 
