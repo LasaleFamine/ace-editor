@@ -1,9 +1,10 @@
 # `<ace-editor>` Polymer (ES6)
 
 [![Build status](https://travis-ci.org/LasaleFamine/ace-editor.svg?branch=master)](https://travis-ci.org/LasaleFamine/ace-editor)
-[![Bower](https://img.shields.io/bower/v/polymer-ace-editor.svg?maxAge=2592000)](https://github.com/LasaleFamine/ace-editor)
+[![Bower version](https://badge.fury.io/bo/polymer-ace-editor.svg)](https://badge.fury.io/bo/polymer-ace-editor)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![David](https://img.shields.io/david/dev/lasalefamine/ace-editor.svg?maxAge=2592000?style=plastic)](https://github.com/LasaleFamine/ace-editor)
+[![Dependency Status](https://gemnasium.com/badges/github.com/LasaleFamine/ace-editor.svg)](https://gemnasium.com/github.com/LasaleFamine/ace-editor)
+
 
 
 > Wrapper of [Ace Editor](https://ace.c9.io) as a customizable [Polymer 1.0](https://www.polymer-project.org/1.0/) WebComponent in ES6 syntax.
