@@ -1,7 +1,7 @@
 {
   "name": "polymer-ace-editor",
   "main": "ace-editor.js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "authors": [
     "LasaleFamine <info@godev.space>"
   ],
@@ -23,7 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
+    "polymer": "^1.7.0",
     "polymer-lib-loader": "^0.1.3"
   }
 }
