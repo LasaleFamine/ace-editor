@@ -23,7 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
+    "polymer": "^1.7.0",
     "polymer-lib-loader": "^0.1.3"
   }
 }
