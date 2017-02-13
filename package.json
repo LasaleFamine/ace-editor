@@ -1,6 +1,6 @@
 {
   "name": "polymer-ace-editor",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Polymer (ES6) wrapper of Ace (C9) editor",
   "main": "ace-editor.js",
   "repository": {
