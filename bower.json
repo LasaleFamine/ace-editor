@@ -24,6 +24,6 @@
   ],
   "dependencies": {
     "polymer": "^1.7.0",
-    "polymer-lib-loader": "^0.1.3"
+    "polymer-lib-loader": "^0.2.0"
   }
 }
