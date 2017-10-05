@@ -1,19 +1,100 @@
 <!doctype html>
-<html>
-  <head>
-    <title>ace-editor demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html lang="en">
+<head>
+  <title>ace-editor demo</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="demo.html">
-  </head>
-  <body>
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 
-    <div class="wrap">
-      <demo-page></demo-page>
-    </div>
+  <link rel="import" href="../ace-editor.html">
 
-  </body>
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      demo-snippet {
+        --demo-snippet-demo: {
+          background: var(--paper-grey-200);
+          padding: 16px;
+        };
+        --demo-snippet-code: {
+          max-height: 300px;
+        }
+      }
+      .vertical-section-container {
+        max-width: 100%;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+      .item {
+        flex: 2; /* default 0 */
+      }
+    </style>
+  </custom-style>
+</head>
+<body unresolved>
+  <div class="vertical-section-container centered">
+
+    <h3>Basic ace-editor demo</h3>
+    <demo-snippet>
+      <template is="dom-bind" id="scope">
+        <div class="container">
+          <div class="item">
+            <ace-editor id="one" theme="terminal" on-change="change" on-ace-ready="aceReady"></ace-editor>
+          </div>
+          <div class="item">
+            <div id="preview1"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <ace-editor id="two" on-blur="blur"></ace-editor>
+          </div>
+          <div class="item">
+            <div id="preview2"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <ace-editor id="two" on-blur="blur"></ace-editor>
+          </div>
+          <div class="item">
+            <div id="preview2"></div>
+          </div>
+        </div>
+
+        <script>
+          scope.myContent = "<h1>Test content</h1>";
+          scope.change = function(e) {
+            console.log('change');
+            var content = this.$.one.getContent();
+            this.$.preview1.innerHTML = content;
+          };
+          scope.blur = function(evt) {
+            console.log('blur');
+          };
+          scope.aceReady = function() {
+            this.$.one.setContent(this.myContent);
+            this.$.one.appendContent("hello");
+          };
+        </script>
+      </template>
+    </demo-snippet>
+
+  </div>
+</body>
 </html>

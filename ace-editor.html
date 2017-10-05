@@ -1,6 +1,12 @@
-
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../polymer-lib-loader/lib-loader.html">
+
+<!--
+`<ace-editor>` is a wrapper of [Ace Editor](https://ace.c9.io) as a customizable [Polymer 1.0](https://www.polymer-project.org/1.0/) WebComponent in ES6 syntax.
+
+@element ace-editor
+@demo demo/index.html
+-->
 
 <dom-module id="ace-editor">
   <template>
@@ -16,5 +22,108 @@
       <div id="editor"></div>
     </div>
   </template>
+
   <script src="ace-editor.js"></script>
+
+  <script>
+  Polymer({
+    is: 'ace-editor',
+
+    /**
+     * After the correct initialization of the library and the component.
+     * @event on-ace-change
+     */
+
+    /**
+     * Ace => Editor.on('change')
+     * @event on-change
+     */
+
+    /**
+     * Ace => Editor.on('blur')
+     * @event on-blur
+     */
+
+    /**
+     * Ace => Editor.on('changeSelectionStyle')
+     * @event on-change-selection-style
+     */
+
+    /**
+     * Ace => Editor.on('changeSession')
+     * @event on-change-session
+     */
+
+    /**
+     * Ace => Editor.on('copy')
+     * @event on-copy
+     */
+
+    /**
+     * Ace => Editor.on('focus')
+     * @event on-focus
+     */
+
+    /**
+     * Ace => Editor.on('paste')
+     * @event on-paste
+     */
+
+    properties: {
+      /**
+        * Ace istance
+        */
+      Ace: {
+        type: Function
+      },
+      /**
+       * Set the name of the theme real-time (ref: [test mode](https://ace.c9.io/tool/mode_creator.html))
+       */
+      setTheme: {
+        type: Function
+      },
+      /**
+       * Set the mode live-time  (ref: [test themes](https://ace.c9.io/tool/mode_creator.html)).
+       */
+      setMode: {
+        type: Function
+      },
+      /**
+       * String with the content (also the HTML) currently within the editor
+       */
+      getContent: {
+        type: Function
+      },
+      /**
+       * Content will override the current content of the editor. The content needs to be passed as string.
+       */
+      setContent: {
+        type: Function
+      },
+      /**
+       * Content will be appended after the current content of the editor. The content needs to be passed as string.
+       */
+      appendContent: {
+        type: Function
+      },
+      uniqueId: {
+        type: String,
+        value: 'aceEditorPolymerLibLoader'
+      },
+      version: {
+        type: String,
+        value: '1.2.5'
+      },
+      mode: {
+        type: String,
+        value: 'html'
+      },
+      theme: {
+        type: String,
+        value: 'monokai'
+      }
+    }
+  });
+  </script>
+
 </dom-module>

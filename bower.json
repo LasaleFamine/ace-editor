@@ -1,6 +1,6 @@
 {
-  "name": "polymer-ace-editor",
-  "main": "ace-editor.js",
+  "name": "ace-editor",
+  "main": "ace-editor.html",
   "version": "0.3.0",
   "authors": [
     "LasaleFamine <info@godev.space>"
@@ -25,5 +25,11 @@
   "dependencies": {
     "polymer": "^1.7.0",
     "polymer-lib-loader": "^0.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }
